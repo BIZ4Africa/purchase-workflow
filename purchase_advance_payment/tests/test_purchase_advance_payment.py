@@ -506,14 +506,11 @@ class TestPurchaseAdvancePayment(common.TransactionCase):
     def test_06_skip_payment_post(self):
         self.assertFalse(
             bool(
-                self.env["ir.config_parameter"]
                 .sudo()
                 .get_param("purchase_advance_payment.auto_reconcile_advance_payments")
             )
         )
         self.assertEqual(
-            self.purchase_order_1.amount_residual,
-            3600,
         )
         context_payment = {
             "active_ids": [self.purchase_order_1.id],
@@ -560,7 +557,6 @@ class TestPurchaseAdvancePayment(common.TransactionCase):
         # Set the config parameter to True
         self.assertFalse(
             bool(
-                self.env["ir.config_parameter"]
                 .sudo()
                 .get_param("purchase_advance_payment.auto_reconcile_advance_payments")
             )
